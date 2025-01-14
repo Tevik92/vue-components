@@ -4,30 +4,17 @@
       v-for="card in cards"
       :key="card.id"
       class="card"
-      @click="click(isModal, card)"
+      @click="$emit('card-click', card)"
     >
-      <h3 class="card-title">
-        {{ card.title }}
-      </h3>
-      <div class="card-description">
-        {{ card.description }}
-      </div>
+      {{ card.title }}
+      {{ card.description }}
     </div>
   </div>
 </template>
 
-<script setup>
-const isModal = true;
-const props = defineProps({
-  cards: {
-    type: Array,
-  },
-});
-
-const emit = defineEmits(["openModal", "cardRed"]);
-const click = (value, card) => {
-  emit("openModal", value);
-  emit("cardRed", card);
+<script>
+export default {
+  props: ["cards"],
 };
 </script>
 
@@ -45,5 +32,10 @@ const click = (value, card) => {
   background-color: #eae9e9;
   border-radius: 12px;
   cursor: pointer;
+}
+
+.card-title {
+  font: 600;
+  margin-bottom: 2px;
 }
 </style>
